@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 08, 2023 at 12:14 AM
+-- Generation Time: Oct 08, 2023 at 01:21 AM
 -- Server version: 8.0.33-0ubuntu0.20.04.4
 -- PHP Version: 8.1.21
 
@@ -35,6 +35,28 @@ CREATE TABLE `barang` (
   `id_perlengkapan` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `barang`
+--
+
+INSERT INTO `barang` (`id_barang`, `kode_barang`, `kategori`, `id_kendaraan`, `id_perlengkapan`) VALUES
+(6, 'BRG001', 'Kendaraan', 5, NULL),
+(7, 'BRG002', 'Perlengkapan', NULL, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barang_rusak`
+--
+
+CREATE TABLE `barang_rusak` (
+  `id_barang_rusak` int NOT NULL,
+  `id_barang` int NOT NULL,
+  `tanggal` date NOT NULL,
+  `jumlah_barang` int NOT NULL,
+  `jenis_kerusakan` enum('Rusak Ringan','Rusak Sedang','Rusak Berat') COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +80,13 @@ CREATE TABLE `kendaraan` (
   `status` enum('Barang Lama','Penerimaan Barang') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `kendaraan`
+--
+
+INSERT INTO `kendaraan` (`id_kendaraan`, `no_polisi`, `merek`, `type`, `tahun_pembuatan`, `tanggal_register`, `no_rangka`, `no_mesin`, `no_bpkb`, `cara_perolehan`, `harga_perolehan`, `penempatan`, `kondisi`, `status`) VALUES
+(5, 'Culpa cumque quibus', 'Reiciendis eum sequi', 'Fuga Blanditiis aut', 84, '1992-11-15', 'Aliquam ullamco fugi', 'Quis labore sint lab', 'Non unde maiores dol', 'Veniam consequatur ', 90, 'Blanditiis ut iste e', 'Et ad voluptatem dol', 'Penerimaan Barang');
+
 -- --------------------------------------------------------
 
 --
@@ -75,6 +104,13 @@ CREATE TABLE `perlengkapan` (
   `cara_perolehan` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `penempatan` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `perlengkapan`
+--
+
+INSERT INTO `perlengkapan` (`id_perlengkapan`, `nama_perlengkapan`, `tanggal_register`, `jumlah`, `status`, `satuan`, `harga_perolehan`, `cara_perolehan`, `penempatan`) VALUES
+(10, 'Ut rerum amet itaqu', '2010-03-15', 84, 'Penerimaan Barang', 'Ab odit aliquam dolo', 33, 'Enim similique offic', 'Cillum ut consectetu');
 
 -- --------------------------------------------------------
 
@@ -115,6 +151,13 @@ ALTER TABLE `barang`
   ADD KEY `perlengkapan_id_2` (`id_perlengkapan`);
 
 --
+-- Indexes for table `barang_rusak`
+--
+ALTER TABLE `barang_rusak`
+  ADD PRIMARY KEY (`id_barang_rusak`),
+  ADD KEY `id_barang` (`id_barang`);
+
+--
 -- Indexes for table `kendaraan`
 --
 ALTER TABLE `kendaraan`
@@ -141,19 +184,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_barang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `barang_rusak`
+--
+ALTER TABLE `barang_rusak`
+  MODIFY `id_barang_rusak` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `id_kendaraan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kendaraan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `perlengkapan`
 --
 ALTER TABLE `perlengkapan`
-  MODIFY `id_perlengkapan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_perlengkapan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -171,6 +220,12 @@ ALTER TABLE `user`
 ALTER TABLE `barang`
   ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`id_kendaraan`) REFERENCES `kendaraan` (`id_kendaraan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `barang_ibfk_2` FOREIGN KEY (`id_perlengkapan`) REFERENCES `perlengkapan` (`id_perlengkapan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `barang_rusak`
+--
+ALTER TABLE `barang_rusak`
+  ADD CONSTRAINT `barang_rusak_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

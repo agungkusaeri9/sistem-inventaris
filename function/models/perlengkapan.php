@@ -16,6 +16,22 @@ function get()
     return $data;
 }
 
+function getAllJson()
+{
+    global $koneksi;
+    $items = $koneksi->query("SELECT prl.*, brg.kode_barang, brg.id_barang
+    FROM perlengkapan AS prl 
+    INNER JOIN barang AS brg 
+    ON brg.id_perlengkapan = prl.id_perlengkapan
+    ");
+    $data = [];
+    while ($row = $items->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
 function tambahData($post)
 {
     global $koneksi;
