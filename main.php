@@ -35,14 +35,23 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                     case 'dashboard':
                         include 'pages/dashboard.php';
                         break;
-                    case 'komplek':
-                        include 'pages/komplek/index.php';
+                    case 'perlengkapan':
+                        include 'pages/perlengkapan/index.php';
                         break;
-                    case 'komplek-create':
-                        include 'pages/komplek/create.php';
+                    case 'perlengkapan-create':
+                        include 'pages/perlengkapan/create.php';
                         break;
-                    case 'komplek-edit':
-                        include 'pages/komplek/edit.php';
+                    case 'perlengkapan-edit':
+                        include 'pages/perlengkapan/edit.php';
+                        break;
+                    case 'kendaraan':
+                        include 'pages/kendaraan/index.php';
+                        break;
+                    case 'kendaraan-create':
+                        include 'pages/kendaraan/create.php';
+                        break;
+                    case 'kendaraan-edit':
+                        include 'pages/kendaraan/edit.php';
                         break;
                     case 'user':
                         include 'pages/user/index.php';
@@ -87,43 +96,41 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
     <script src="<?= BASE_URL . '/assets/datatables-bs4/js/dataTables.bootstrap4.min.js' ?>"></script>
     <script src="<?= BASE_URL . '/assets/sweetalert2/sweetalert2.min.js' ?>"></script>
     <script>
-        $(function () {
+        $(function() {
             $('#dTable').DataTable();
         })
     </script>
     <?php if (isset($_GET['status'])) : ?>
-    <?php if ($_GET['status'] === 'success') : ?>
-    <script>
-        $(function () {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Berhasil!',
-                text: '<?= $_GET['
-                message '] ?? '
-                Berhasil ' ?>',
-                showConfirmButton: true,
-                timer: 2500
-            })
-        })
-    </script>
-    <?php endif; ?>
-    <?php if ($_GET['status'] === 'error') : ?>
-    <script>
-        $(function () {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Gagal!',
-                text: '<?= $_GET['
-                message '] ?? '
-                Gagal ' ?>',
-                showConfirmButton: true,
-                timer: 2500
-            })
-        })
-    </script>
-    <?php endif; ?>
+        <?php if ($_GET['status'] === 'success') : ?>
+            <script>
+                $(function() {
+                    let message = '<?= $_GET['message'] ?>';
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: message,
+                        showConfirmButton: true,
+                        timer: 2500
+                    })
+                })
+            </script>
+        <?php endif; ?>
+        <?php if ($_GET['status'] === 'error') : ?>
+            <script>
+                $(function() {
+                    let message = '<?= $_GET['message'] ?>';
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: message,
+                        showConfirmButton: true,
+                        timer: 2500
+                    })
+                })
+            </script>
+        <?php endif; ?>
     <?php endif; ?>
 </body>
 

@@ -7,15 +7,19 @@
         </div>
         <ul class="sidebar-menu">
                 <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL . '/main.php?page=dashboard' ?>"><i
-                                        class="fas fa-fire"></i>
+                        <a class="nav-link" href="<?= BASE_URL . '/main.php?page=dashboard' ?>"><i class="fas fa-fire"></i>
                                 <span>Dashboard</span>
                         </a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL . '/main.php?page=komplek' ?>"><i
-                                        class="fas fa-warehouse"></i>
-                                <span>Komplek</span>
+                        <a class="nav-link" href="<?= BASE_URL . '/main.php?page=perlengkapan' ?>"><i class="fas fa-folder"></i>
+                                <span>Perlengkapan</span>
+                        </a>
+                </li>
+
+                <li class="nav-item">
+                        <a class="nav-link" href="<?= BASE_URL . '/main.php?page=kendaraan' ?>"><i class="fas fa-folder"></i>
+                                <span>Kendaraan</span>
                         </a>
                 </li>
 

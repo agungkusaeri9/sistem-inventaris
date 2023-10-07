@@ -5,7 +5,7 @@ function is_admin()
 {
     // cek admin atau tidak
     if ($_SESSION['level'] !== 'admin') {
-      redirectUrl(BASE_URL . '/warga.php?page=dashboard');
+        redirectUrl(BASE_URL . '/warga.php?page=dashboard');
     }
 }
 
@@ -78,5 +78,16 @@ function getMonth()
 
 function redirectUrl($url)
 {
-    echo '<script>window.location.href = "'.$url.'";</script>';
+    echo '<script>window.location.href = "' . $url . '";</script>';
+}
+
+function formatRupiah($angka)
+{
+    $rupiah = "Rp " . number_format($angka, 0, ',', '.');
+    return $rupiah;
+}
+function formatTanggal($tanggal)
+{
+    $tanggal_dalam_format_baru = date('d-m-Y', strtotime($tanggal));
+    return $tanggal_dalam_format_baru;
 }
