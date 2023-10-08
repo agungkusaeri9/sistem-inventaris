@@ -59,7 +59,6 @@ if (isset($_POST['delete'])) {
                                             <td><?= $item['jumlah_barang'] ?></td>
                                             <td><?= $item['jenis_kerusakan'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL . '/main.php?page=barang-rusak-detail&id_barang_rusak=' . $item['id_barang_rusak'] ?>" class="btn btn-warning"><i class="fas fa-eye"></i> Detail</a>
                                                 <a href="<?= BASE_URL . '/main.php?page=barang-rusak-edit&id_barang_rusak=' . $item['id_barang_rusak'] ?>" class="btn btn-info"><i class="fas fa-edit"></i> Edit</a>
                                                 <form action="" method="post" class="d-inline">
                                                     <input type="text" name="id_barang_rusak" value="<?= $item['id_barang_rusak'] ?>" hidden>

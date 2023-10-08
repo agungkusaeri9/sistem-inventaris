@@ -43,30 +43,29 @@ function tambahData($post)
     return $insertId;
 }
 
-function getById($id_perlengkapan)
+function getById($id_barang_rusak)
 {
     global $koneksi;
-    $item = $koneksi->query("SELECT prl.*, brg.kode_barang 
-    FROM perlengkapan AS prl 
-    INNER JOIN barang AS brg 
-    ON brg.id_perlengkapan = prl.id_perlengkapan WHERE prl.id_perlengkapan=$id_perlengkapan")->fetch_assoc();
+    $item = $koneksi->query("SELECT brg.kode_barang, brg.kategori, knd.*, prl.*, br.*
+    FROM barang_rusak AS br
+    INNER JOIN barang AS brg ON br.id_barang = brg.id_barang
+    LEFT JOIN kendaraan AS knd ON brg.id_kendaraan = knd.id_kendaraan
+    LEFT JOIN perlengkapan AS prl ON brg.id_perlengkapan = prl.id_perlengkapan
+    WHERE (knd.no_polisi IS NOT NULL OR prl.nama_perlengkapan IS NOT NULL) AND br.id_barang_rusak = $id_barang_rusak;
+    ")->fetch_assoc();
+    // $item = $koneksi->query("SELECT * FROM barang_rusak WHERE id_barang_rusak=$id_barang_rusak")->fetch_assoc();
     return $item;
 }
 
 function updateData($post)
 {
     global $koneksi;
-    $kode_barang = htmlspecialchars($post['kode_barang']);
-    $nama_perlengkapan = htmlspecialchars($post['nama_perlengkapan']);
-    $tanggal_register = htmlspecialchars($post['tanggal_register']);
-    $jumlah = htmlspecialchars($post['jumlah']);
-    $status = htmlspecialchars($post['status']);
-    $harga_perolehan = htmlspecialchars($post['harga_perolehan']);
-    $cara_perolehan = htmlspecialchars($post['cara_perolehan']);
-    $penempatan = htmlspecialchars($post['penempatan']);
-    $satuan = htmlspecialchars($post['satuan']);
+    $id_barang_rusak = htmlspecialchars($post['id_barang_rusak']);
+    $jumlah_barang = htmlspecialchars($post['jumlah_barang']);
+    $jenis_kerusakan = htmlspecialchars($post['jenis_kerusakan']);
+    $tanggal = htmlspecialchars($post['tanggal']);
 
-    $update = $koneksi->query("UPDATE `perlengkapan` SET `nama_perlengkapan` = '$nama_perlengkapan', `tanggal_register` = '$tanggal_register', `jumlah` = '$jumlah', `status` = '$status', `satuan` = '$satuan', `harga_perolehan` = '$harga_perolehan', `cara_perolehan` = '$cara_perolehan', `penempatan` = '$penempatan' WHERE `perlengkapan`.`id_perlengkapan` = $post[id_perlengkapan]");
+    $update = $koneksi->query("UPDATE `barang_rusak` SET `tanggal` = '$tanggal', `jumlah_barang` = '$jumlah_barang', `jenis_kerusakan` = '$jenis_kerusakan' WHERE `barang_rusak`.`id_barang_rusak` = $id_barang_rusak");
 
     if ($update) {
         return true;
@@ -95,10 +94,8 @@ function validasiTambah($post)
 
 function validasiEdit($post)
 {
-    var_dump($post);
-    die;
-    if (!$post['id_barang'] || !$post['tanggal_register'] || !$post['jumlah'] || !$post['status'] || !$post['satuan'] || !$post['harga_perolehan'] || !$post['cara_perolehan'] || !$post['penempatan']) {
-        redirectUrl(BASE_URL . '/main.php?page=perlengkapan-edit&id_perlengkapan=' . $post['id_perlengkapan'] . '&status=error&message=Semua inputan tidak boleh kosong.');
+    if (!$post['jumlah_barang'] || !$post['tanggal'] || !$post['jenis_kerusakan']) {
+        redirectUrl(BASE_URL . '/main.php?page=barang-rusak-edit&id_barang_rusak=' . $post['id_barang_rusak'] . '&status=error&message=Semua inputan tidak boleh kosong.');
         exit;
     }
 }
