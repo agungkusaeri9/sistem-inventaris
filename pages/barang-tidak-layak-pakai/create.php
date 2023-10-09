@@ -7,9 +7,9 @@ if (isset($_POST['tambah'])) {
     validasiTambah($_POST);
     $tambah = tambahData($_POST);
     if ($tambah) {
-        redirectUrl(BASE_URL . '/main.php?page=barang-rusak&status=success&message=barang-rusak berhasil ditambah!');
+        redirectUrl(BASE_URL . '/main.php?page=barang-tidak-layak-pakai&status=success&message=Barang Tidak Layak Pakai berhasil ditambah!');
     } else {
-        redirectUrl(BASE_URL . '/main.php?page=barang-rusak&status=error&message=barang-rusak gagal ditambah!');
+        redirectUrl(BASE_URL . '/main.php?page=barang-tidak-layak-pakai&status=error&message=Barang Tidak Layak Pakai gagal ditambah!');
     }
 }
 
@@ -17,14 +17,14 @@ if (isset($_POST['tambah'])) {
 
 <section class="section">
     <div class="section-header">
-        <h1>Tambah Barang Rusak</h1>
+        <h1>Tambah Barang Tidak Layak Pakai</h1>
         <div class="section-header-breadcrumb">
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="<?= BASE_URL . '/main.php?page=dashboard' ?>">Dashboard</a>
                 </div>
-                <div class="breadcrumb-item active"><a href="<?= BASE_URL . '/main.php?page=barang-rusak' ?>">Data
-                        Barang Rusak</a></div>
-                <div class="breadcrumb-item">Tambah Barang Rusak</div>
+                <div class="breadcrumb-item active"><a href="<?= BASE_URL . '/main.php?page=barang-tidak-layak-pakai' ?>">Data
+                        Barang Tidak Layak Pakai</a></div>
+                <div class="breadcrumb-item">Tambah Barang Tidak Layak Pakai</div>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@ if (isset($_POST['tambah'])) {
                             <?= $error ?>
                         <?php endif; ?>
                         <form action="" method="post">
-                            <input type="hidden" name="status_rusak" value="Barang Rusak">
+                            <input type="hidden" name="status_rusak" value="Barang Tidak Layak Pakai">
                             <div class="form-group">
                                 <label for="kategori">Kategori Barang</label>
                                 <select name="kategori" id="kategori" class="form-control">

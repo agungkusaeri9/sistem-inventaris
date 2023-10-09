@@ -61,6 +61,24 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                     case 'barang-rusak-edit':
                         include 'pages/barang-rusak/edit.php';
                         break;
+                    case 'barang-tidak-layak-pakai':
+                        include 'pages/barang-tidak-layak-pakai/index.php';
+                        break;
+                    case 'barang-tidak-layak-pakai-create':
+                        include 'pages/barang-tidak-layak-pakai/create.php';
+                        break;
+                    case 'barang-tidak-layak-pakai-edit':
+                        include 'pages/barang-tidak-layak-pakai/edit.php';
+                        break;
+                    case 'barang-service':
+                        include 'pages/barang-service/index.php';
+                        break;
+                    case 'barang-service-create':
+                        include 'pages/barang-service/create.php';
+                        break;
+                    case 'barang-service-edit':
+                        include 'pages/barang-service/edit.php';
+                        break;
                     case 'user':
                         include 'pages/user/index.php';
                         break;

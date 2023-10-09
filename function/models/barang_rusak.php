@@ -8,7 +8,24 @@ function get()
     INNER JOIN barang AS brg ON br.id_barang = brg.id_barang
     LEFT JOIN kendaraan AS knd ON brg.id_kendaraan = knd.id_kendaraan
     LEFT JOIN perlengkapan AS prl ON brg.id_perlengkapan = prl.id_perlengkapan
-    WHERE knd.no_polisi IS NOT NULL OR prl.nama_perlengkapan IS NOT NULL");
+    WHERE (knd.no_polisi IS NOT NULL OR prl.nama_perlengkapan IS NOT NULL) AND status_rusak = 'Barang Rusak' ");
+    $data = [];
+    while ($row = $items->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
+function getTidakLayakPakai()
+{
+    global $koneksi;
+    $items = $koneksi->query("SELECT brg.kode_barang,brg.kategori, knd.no_polisi, prl.nama_perlengkapan, br.*
+    FROM barang_rusak AS br
+    INNER JOIN barang AS brg ON br.id_barang = brg.id_barang
+    LEFT JOIN kendaraan AS knd ON brg.id_kendaraan = knd.id_kendaraan
+    LEFT JOIN perlengkapan AS prl ON brg.id_perlengkapan = prl.id_perlengkapan
+    WHERE (knd.no_polisi IS NOT NULL OR prl.nama_perlengkapan IS NOT NULL) AND status_rusak = 'Barang Tidak Layak Pakai'");
     $data = [];
     while ($row = $items->fetch_assoc()) {
         $data[] = $row;
@@ -25,14 +42,14 @@ function tambahData($post)
     $jumlah = htmlspecialchars($post['jumlah']);
     $tanggal = htmlspecialchars($post['tanggal']);
     $jenis_kerusakan = htmlspecialchars($post['jenis_kerusakan']);
-
+    $status_rusak = htmlspecialchars($post['status_rusak']);
     if ($id_kendaraan)
         $id_barang = $id_kendaraan;
     else
         $id_barang = $id_perlengkapan;
 
 
-    $insert = $koneksi->query("INSERT INTO `barang_rusak` (`id_barang_rusak`, `id_barang`, `tanggal`, `jumlah_barang`, `jenis_kerusakan`) VALUES (NULL, '$id_barang', '$tanggal', '$jumlah', '$jenis_kerusakan')");
+    $insert = $koneksi->query("INSERT INTO `barang_rusak` (`id_barang_rusak`, `id_barang`, `tanggal`, `jumlah_barang`, `jenis_kerusakan`, `status_rusak`) VALUES (NULL, $id_barang, '$tanggal', '$jumlah', '$jenis_kerusakan', '$status_rusak');");
 
     if ($insert) {
         $insertId = $koneksi->insert_id;
