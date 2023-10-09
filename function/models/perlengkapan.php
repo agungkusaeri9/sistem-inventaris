@@ -119,3 +119,29 @@ function validasiEdit($post)
         exit;
     }
 }
+
+function getDataFilter($filter)
+{
+    global $koneksi;
+
+    $dari_tanggal = $filter['dari_tanggal'];
+    $sampai_tanggal = $filter['sampai_tanggal'];
+    $query = "SELECT prl.*, brg.kode_barang 
+    FROM perlengkapan AS prl 
+    INNER JOIN barang AS brg 
+    ON brg.id_perlengkapan = prl.id_perlengkapan";
+    // Filter tanggal jika 'dari_tanggal' dan 'sampai_tanggal' ada
+    if (!empty($dari_tanggal) && !empty($sampai_tanggal)) {
+        $query .= " AND DATE(prl.tanggal_dibuat) BETWEEN '$dari_tanggal' AND '$sampai_tanggal'";
+    } elseif (!empty($dari_tanggal)) {
+        $query .= " AND DATE(prl.tanggal_dibuat) = '$dari_tanggal'";
+    }
+
+    $items = $koneksi->query($query);
+    $data = [];
+    while ($row = $items->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    return $data;
+}

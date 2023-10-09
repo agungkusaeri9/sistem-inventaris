@@ -38,6 +38,16 @@
                                 <span>Barang Service</span>
                         </a>
                 </li>
+                <li class="dropdown">
+                        <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Laporan</span></a>
+                        <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="<?= BASE_URL . '/main.php?page=laporan-kendaraan' ?>">Inventaris Kendaraan</a></li>
+                                <li><a class="nav-link" href="<?= BASE_URL . '/main.php?page=laporan-perlengkapan' ?>">Inventaris Perlengkapan</a></li>
+                                <li><a class="nav-link" href="<?= BASE_URL . '/main.php?page=laporan-barang-rusak' ?>">Barang Rusak</a></li>
+                                <li><a class="nav-link" href="<?= BASE_URL . '/main.php?page=laporan-barang-tidak-layak-pakai' ?>">Barang Tidak Layak Pakai</a></li>
+                                <li><a class="nav-link" href="<?= BASE_URL . '/main.php?page=laporan-barang-service' ?>">Barang Service</a></li>
+                        </ul>
+                </li>
                 <li class="nav-item">
                         <a class="nav-link" href="<?= BASE_URL . '/main.php?page=user' ?>"><i class="fas fa-users"></i>
                                 <span>User</span>

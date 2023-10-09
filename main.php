@@ -88,6 +88,21 @@ $page = isset($_GET['page']) ? $_GET['page'] : '';
                     case 'user-edit':
                         include 'pages/user/edit.php';
                         break;
+                    case 'laporan-barang-rusak':
+                        include 'pages/barang-rusak/laporan.php';
+                        break;
+                    case 'laporan-barang-tidak-layak-pakai':
+                        include 'pages/barang-tidak-layak-pakai/laporan.php';
+                        break;
+                    case 'laporan-barang-service':
+                        include 'pages/barang-service/laporan.php';
+                        break;
+                    case 'laporan-kendaraan':
+                        include 'pages/kendaraan/laporan.php';
+                        break;
+                    case 'laporan-perlengkapan':
+                        include 'pages/perlengkapan/laporan.php';
+                        break;
                     default:
                         include 'pages/dashboard.php';
                         break;

@@ -116,3 +116,68 @@ function validasiEdit($post)
         exit;
     }
 }
+
+function getDataFilter($filter)
+{
+    global $koneksi;
+    $dari_tanggal = $filter['dari_tanggal'];
+    $sampai_tanggal = $filter['sampai_tanggal'];
+
+    // Buat string query SQL dasar tanpa filter tanggal
+    $query = "SELECT brg.kode_barang, brg.kategori, knd.no_polisi, prl.nama_perlengkapan, br.*
+          FROM barang_rusak AS br
+          INNER JOIN barang AS brg ON br.id_barang = brg.id_barang
+          LEFT JOIN kendaraan AS knd ON brg.id_kendaraan = knd.id_kendaraan
+          LEFT JOIN perlengkapan AS prl ON brg.id_perlengkapan = prl.id_perlengkapan
+          WHERE (knd.no_polisi IS NOT NULL OR prl.nama_perlengkapan IS NOT NULL)
+          AND status_rusak = 'Barang Rusak'";
+
+    // Periksa apakah 'dari_tanggal' dan 'sampai_tanggal' tidak kosong
+    if (!empty($dari_tanggal) && !empty($sampai_tanggal)) {
+        // Tambahkan kondisi untuk filter tanggal dengan rentang
+        $query .= " AND br.tanggal BETWEEN '$dari_tanggal' AND '$sampai_tanggal'";
+    } elseif (!empty($dari_tanggal)) {
+        // Tambahkan kondisi untuk filter tanggal awal
+        $query .= " AND DATE(br.tanggal) = '$dari_tanggal'";
+    }
+
+    $items = $koneksi->query($query);
+    $data = [];
+    while ($row = $items->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
+function getDataBarangTidakLayakPakaiFilter($filter)
+{
+    global $koneksi;
+    $dari_tanggal = $filter['dari_tanggal'];
+    $sampai_tanggal = $filter['sampai_tanggal'];
+
+    // Buat string query SQL dasar tanpa filter tanggal
+    $query = "SELECT brg.kode_barang, brg.kategori, knd.no_polisi, prl.nama_perlengkapan, br.*
+          FROM barang_rusak AS br
+          INNER JOIN barang AS brg ON br.id_barang = brg.id_barang
+          LEFT JOIN kendaraan AS knd ON brg.id_kendaraan = knd.id_kendaraan
+          LEFT JOIN perlengkapan AS prl ON brg.id_perlengkapan = prl.id_perlengkapan
+          WHERE (knd.no_polisi IS NOT NULL OR prl.nama_perlengkapan IS NOT NULL)
+          AND status_rusak = 'Barang Tidak Layak Pakai'";
+
+    // Periksa apakah 'dari_tanggal' dan 'sampai_tanggal' tidak kosong
+    if (!empty($dari_tanggal) && !empty($sampai_tanggal)) {
+        // Tambahkan kondisi untuk filter tanggal dengan rentang
+        $query .= " AND br.tanggal BETWEEN '$dari_tanggal' AND '$sampai_tanggal'";
+    } elseif (!empty($dari_tanggal)) {
+        // Tambahkan kondisi untuk filter tanggal awal
+        $query .= " AND DATE(br.tanggal) = '$dari_tanggal'";
+    }
+
+    $items = $koneksi->query($query);
+    $data = [];
+    while ($row = $items->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
