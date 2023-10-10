@@ -1,6 +1,7 @@
 <?php
 
 require_once 'function/models/barang_rusak.php';
+is_admin();
 
 $items = getTidakLayakPakai();
 

@@ -4,7 +4,6 @@ include 'config/config.php';
 include 'config/koneksi.php';
 include 'function/helper.php';
 is_login();
-is_admin();
 
 
 $page = isset($_GET['page']) ? $_GET['page'] : '';

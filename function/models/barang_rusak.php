@@ -49,7 +49,7 @@ function tambahData($post)
         $id_barang = $id_perlengkapan;
 
 
-    $insert = $koneksi->query("INSERT INTO `barang_rusak` (`id_barang_rusak`, `id_barang`, `tanggal`, `jumlah_barang`, `jenis_kerusakan`, `status_rusak`) VALUES (NULL, $id_barang, '$tanggal', '$jumlah', '$jenis_kerusakan', '$status_rusak');");
+    $insert = $koneksi->query("INSERT INTO `barang_rusak` (`id_barang_rusak`, `id_barang`, `tanggal`, `jumlah_barang`, `jenis_kerusakan`, `status_rusak`) VALUES (NULL, $id_barang, '$tanggal', '$jumlah', '$jenis_kerusakan', '$status_rusak')");
 
     if ($insert) {
         $insertId = $koneksi->insert_id;

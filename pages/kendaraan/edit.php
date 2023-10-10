@@ -1,6 +1,7 @@
 <?php
 
 require_once 'function/models/kendaraan.php';
+is_admin();
 
 $id_kendaraan = $_GET['id_kendaraan'];
 

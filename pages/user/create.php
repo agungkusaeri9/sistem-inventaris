@@ -1,6 +1,7 @@
 <?php
 
 require_once 'function/models/user.php';
+is_admin();
 
 if (isset($_POST['tambah'])) {
     validasiTambah($_POST);
@@ -30,7 +31,7 @@ if (isset($_POST['tambah'])) {
                 <div class="card">
                     <div class="card-body">
                         <?php if (isset($error)) : ?>
-                        <?= $error ?>
+                            <?= $error ?>
                         <?php endif; ?>
                         <form action="" method="post" id="form">
                             <div class="form-group">
@@ -39,8 +40,7 @@ if (isset($_POST['tambah'])) {
                             </div>
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="username" class="form-control" name="username" value="" id="username"
-                                    required>
+                                <input type="username" class="form-control" name="username" value="" id="username" required>
                             </div>
                             <div class="form-group">
                                 <label for="level">Level</label>
@@ -52,13 +52,11 @@ if (isset($_POST['tambah'])) {
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password" value="" id="password"
-                                    required>
+                                <input type="password" class="form-control" name="password" value="" id="password" required>
                             </div>
                             <div class="form-group">
                                 <label for="konfirmasi_password">Konfirmasi Password</label>
-                                <input type="password" class="form-control" name="konfirmasi_password" value=""
-                                    id="konfirmasi_password" required>
+                                <input type="password" class="form-control" name="konfirmasi_password" value="" id="konfirmasi_password" required>
                             </div>
                             <div class="form-group">
                                 <button name="tambah" class="btn btn-block btn-primary"><i class="fas fa-plus"></i>
@@ -73,9 +71,9 @@ if (isset($_POST['tambah'])) {
 </section>
 
 <script>
-    $(function () {
+    $(function() {
 
-        let getBlokByKomplek = function (id_komplek) {
+        let getBlokByKomplek = function(id_komplek) {
             let data;
             $.ajax({
                 url: '<?= BASE_URL . ' / pages / blok / get - by - komplek.php ' ?>',
@@ -85,10 +83,10 @@ if (isset($_POST['tambah'])) {
                     id_komplek
                 },
                 dataType: 'JSON',
-                success: function (response) {
+                success: function(response) {
                     data = response;
                 },
-                error: function (err) {
+                error: function(err) {
                     console.log(err);
                 }
             })
@@ -96,7 +94,7 @@ if (isset($_POST['tambah'])) {
             return data;
         }
 
-        $('#form #level').on('change', function () {
+        $('#form #level').on('change', function() {
             let level = $(this).val();
             if (level === 'admin') {
                 $('.d-warga').addClass('d-none');
@@ -107,7 +105,7 @@ if (isset($_POST['tambah'])) {
 
 
         // get blok by komplek
-        $('#form #id_komplek').on('change', function () {
+        $('#form #id_komplek').on('change', function() {
             let id_komplek = $(this).val();
 
             let data_blok = getBlokByKomplek(id_komplek);

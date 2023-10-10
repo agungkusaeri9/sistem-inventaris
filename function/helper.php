@@ -3,16 +3,15 @@
 
 function is_admin()
 {
-    // cek admin atau tidak
+    // cek warga atau tidak
     if ($_SESSION['level'] !== 'admin') {
-        redirectUrl(BASE_URL . '/warga.php?page=dashboard');
+        redirectUrl(BASE_URL . '/main.php?page=dashboard');
     }
 }
-
-function is_warga()
+function is_camat()
 {
     // cek warga atau tidak
-    if ($_SESSION['level'] !== 'warga') {
+    if ($_SESSION['level'] !== 'camat') {
         redirectUrl(BASE_URL . '/main.php?page=dashboard');
     }
 }

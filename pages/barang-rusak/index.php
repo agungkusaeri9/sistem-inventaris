@@ -9,6 +9,8 @@ if (isset($_POST['delete'])) {
     redirectUrl(BASE_URL . '/main.php?page=barang-rusak&status=success&message=Barang Rusak berhasil dihapus!');
 }
 
+is_admin();
+
 ?>
 <section class="section">
     <div class="section-header">

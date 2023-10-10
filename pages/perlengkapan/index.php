@@ -1,6 +1,7 @@
 <?php
 
 require_once 'function/models/perlengkapan.php';
+is_admin();
 
 $items = get();
 

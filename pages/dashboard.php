@@ -4,6 +4,10 @@ require_once 'function/models/dashboard.php';
 require_once 'function/helper.php';
 
 
+$kendaraan = kendaraan();
+$perlengkapan = perlengkapan();
+$barang_rusak = barang_rusak();
+$barang_tidak_layak_pakai = barang_tidak_layak_pakai();
 ?>
 
 <section class="section">
@@ -18,10 +22,10 @@ require_once 'function/helper.php';
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Jumlah Pembayaran</h4>
+                        <h4>Jumlah Kendaraan</h4>
                     </div>
                     <div class="card-body">
-                        0
+                        <?= $kendaraan['total'] ?>
                     </div>
                 </div>
             </div>
@@ -29,14 +33,14 @@ require_once 'function/helper.php';
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
-                    <i class="far fa-user"></i>
+                    <i class="far fa-file"></i>
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Jumlah Warga</h4>
+                        <h4>Jumlah Perlengkapan</h4>
                     </div>
                     <div class="card-body">
-                        0
+                        <?= $perlengkapan['total'] ?>
                     </div>
                 </div>
             </div>
@@ -44,14 +48,14 @@ require_once 'function/helper.php';
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-danger">
-                    <i class="far fa-newspaper"></i>
+                    <i class="far fa-file"></i>
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Jumlah Jenis Iuran</h4>
+                        <h4>Jumlah Barang Rusak</h4>
                     </div>
                     <div class="card-body">
-                        0
+                        <?= $barang_rusak['total'] ?>
                     </div>
                 </div>
             </div>
@@ -60,44 +64,17 @@ require_once 'function/helper.php';
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-success">
-                    <i class="far fa-newspaper"></i>
+                    <i class="far fa-file"></i>
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Jumlah Periode Iuran</h4>
+                        <h4>Barang Tidak Layak Pakai</h4>
                     </div>
                     <div class="card-body">
-                        0
+                        <?= $barang_tidak_layak_pakai['total'] ?>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Pembayaran Terakhir</h4>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover" id="dTable">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Tanggal</th>
-                                    <th>Kode Pembayaran</th>
-                                    <th>Nama Warga</th>
-                                    <th>Jenis Iuran</th>
-                                    <th>Nominal</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
 </section>

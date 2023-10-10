@@ -1,6 +1,7 @@
 <?php
 
 require_once 'function/models/user.php';
+is_admin();
 
 $items = get();
 if (isset($_POST['delete'])) {
@@ -23,8 +24,7 @@ if (isset($_POST['delete'])) {
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <a href="<?= BASE_URL . '/main.php?page=user-create' ?>"
-                            class="btn btn-sm btn-primary mb-3 btnAdd"><i class="fas fa-plus"></i> Tambah Data</a>
+                        <a href="<?= BASE_URL . '/main.php?page=user-create' ?>" class="btn btn-sm btn-primary mb-3 btnAdd"><i class="fas fa-plus"></i> Tambah Data</a>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover nowrap" id="dTable">
                                 <thead>
@@ -39,28 +39,25 @@ if (isset($_POST['delete'])) {
                                 <tbody>
                                     <?php $i = 1;
                                     foreach ($items as $item) : ?>
-                                    <tr>
-                                        <td><?= $i++ ?></td>
-                                        <td><?= $item['nama'] ?></td>
-                                        <td><?= $item['username'] ?></td>
-                                        <td><?= $item['level'] ?? '-' ?></td>
-                                        <td>
-                                            <?php if ($item['id_user'] != $_SESSION['id_user']) : ?>
-                                            <a href="<?= BASE_URL . '/main.php?page=user-edit&id_user=' . $item['id_user'] ?>"
-                                                class="btn btn-info"><i class="fas fa-edit"></i> Edit</a>
-                                            <form action="" method="post" class="d-inline">
-                                                <input type="text" name="id_user" value="<?= $item['id_user'] ?>"
-                                                    hidden>
-                                                <button name="delete" class="btn btn-danger"><i
-                                                        class="fas fa-trash"></i> Delete</button>
-                                            </form>
+                                        <tr>
+                                            <td><?= $i++ ?></td>
+                                            <td><?= $item['nama'] ?></td>
+                                            <td><?= $item['username'] ?></td>
+                                            <td><?= $item['level'] ?? '-' ?></td>
+                                            <td>
+                                                <?php if ($item['id_user'] != $_SESSION['id_user']) : ?>
+                                                    <a href="<?= BASE_URL . '/main.php?page=user-edit&id_user=' . $item['id_user'] ?>" class="btn btn-info"><i class="fas fa-edit"></i> Edit</a>
+                                                    <form action="" method="post" class="d-inline">
+                                                        <input type="text" name="id_user" value="<?= $item['id_user'] ?>" hidden>
+                                                        <button name="delete" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                                                    </form>
 
-                                            <?php else : ?>
-                                            <i>Tidak Ada Akses!</i>
-                                            <?php endif; ?>
+                                                <?php else : ?>
+                                                    <i>Tidak Ada Akses!</i>
+                                                <?php endif; ?>
 
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
 
                                     <?php endforeach; ?>
                                 </tbody>

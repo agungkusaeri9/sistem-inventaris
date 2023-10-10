@@ -1,7 +1,7 @@
 <?php
 
 require_once 'function/models/barang_service.php';
-
+is_admin();
 
 if (isset($_POST['tambah'])) {
     validasiTambah($_POST);

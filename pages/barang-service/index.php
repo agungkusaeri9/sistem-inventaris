@@ -1,6 +1,7 @@
 <?php
 
 require_once 'function/models/barang_service.php';
+is_admin();
 
 $items = get();
 

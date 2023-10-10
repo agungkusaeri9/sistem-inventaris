@@ -1,6 +1,7 @@
 <?php
 
 require_once 'function/models/user.php';
+is_admin();
 
 $id_user = $_GET['id_user'];
 
@@ -37,30 +38,26 @@ if (isset($_POST['update'])) {
                 <div class="card">
                     <div class="card-body">
                         <?php if (isset($error)) : ?>
-                        <?= $error ?>
+                            <?= $error ?>
                         <?php endif; ?>
 
                         <form action="" method="post" id="form">
                             <input type="text" name="id_user" value="<?= $item['id_user'] ?>" hidden>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="form-control" name="nama" value="<?= $item['nama'] ?>"
-                                    id="nama" required>
+                                <input type="text" class="form-control" name="nama" value="<?= $item['nama'] ?>" id="nama" required>
                             </div>
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="username" class="form-control" name="username"
-                                    value="<?= $item['username'] ?>" id="username" required>
+                                <input type="username" class="form-control" name="username" value="<?= $item['username'] ?>" id="username" required>
                             </div>
                             <div class="form-group">
                                 <label for="level">Level</label>
                                 <select name="level" id="level" class="form-control" required>
                                     <option value="">Pilih Level</option>
-                                    <option <?php if($item['level'] === 'admin') : ?> selected <?php endif; ?>
-                                        value="admin">
+                                    <option <?php if ($item['level'] === 'admin') : ?> selected <?php endif; ?> value="admin">
                                         Admin</option>
-                                    <option <?php if($item['level'] === 'camat') : ?> selected <?php endif; ?>
-                                        value="camat">
+                                    <option <?php if ($item['level'] === 'camat') : ?> selected <?php endif; ?> value="camat">
                                         Camat</option>
                                 </select>
                             </div>
@@ -71,12 +68,10 @@ if (isset($_POST['update'])) {
                                 <input type="password" class="form-control" name="password" value="" id="password">
                             </div>
                             <div class="form-group">
-                                <label for="konfirmasi_password">Konfirmasi Password (<span
-                                        class="text-danger">Kosongkan Jika tidak ingin
+                                <label for="konfirmasi_password">Konfirmasi Password (<span class="text-danger">Kosongkan Jika tidak ingin
                                         merubah
                                         password)</span></label>
-                                <input type="password" class="form-control" name="konfirmasi_password" value=""
-                                    id="konfirmasi_password">
+                                <input type="password" class="form-control" name="konfirmasi_password" value="" id="konfirmasi_password">
                             </div>
                             <div class="form-group">
                                 <button name="update" class="btn btn-block btn-primary"><i class="fas fa-save"></i>
@@ -92,9 +87,9 @@ if (isset($_POST['update'])) {
 </section>
 
 <script>
-    $(function () {
+    $(function() {
 
-        let getBlokByKomplek = function (id_komplek) {
+        let getBlokByKomplek = function(id_komplek) {
             let data;
             $.ajax({
                 url: '<?= BASE_URL . ' / pages / blok / get - by - komplek.php ' ?>',
@@ -104,10 +99,10 @@ if (isset($_POST['update'])) {
                     id_komplek
                 },
                 dataType: 'JSON',
-                success: function (response) {
+                success: function(response) {
                     data = response;
                 },
-                error: function (err) {
+                error: function(err) {
                     console.log(err);
                 }
             })
@@ -115,7 +110,7 @@ if (isset($_POST['update'])) {
             return data;
         }
 
-        $('#form #level').on('change', function () {
+        $('#form #level').on('change', function() {
             let level = $(this).val();
             if (level === 'admin') {
                 $('.d-warga').addClass('d-none');
@@ -126,7 +121,7 @@ if (isset($_POST['update'])) {
 
 
         // get blok by komplek
-        $('#form #id_komplek').on('change', function () {
+        $('#form #id_komplek').on('change', function() {
             let id_komplek = $(this).val();
 
             let data_blok = getBlokByKomplek(id_komplek);
